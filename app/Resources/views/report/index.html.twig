@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Reports list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for report in reports %}
+            <tr>
+                <td><a href="{{ path('report_show', { 'id': report.id }) }}">{{ report.id }}</a></td>
+                <td>{{ report.description }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('report_show', { 'id': report.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('report_edit', { 'id': report.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('report_new') }}">Create a new report</a>
+        </li>
+    </ul>
+{% endblock %}

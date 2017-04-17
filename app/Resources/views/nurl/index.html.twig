@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Nurls list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Summary</th>
+                <th>Content</th>
+                <th>Is_private</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for nurl in nurls %}
+            <tr>
+                <td><a href="{{ path('nurl_show', { 'id': nurl.id }) }}">{{ nurl.id }}</a></td>
+                <td>{{ nurl.title }}</td>
+                <td>{{ nurl.summary }}</td>
+                <td>{{ nurl.content }}</td>
+                <td>{% if nurl.isprivate %}Yes{% else %}No{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('nurl_show', { 'id': nurl.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('nurl_edit', { 'id': nurl.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('nurl_new') }}">Create a new nurl</a>
+        </li>
+    </ul>
+{% endblock %}

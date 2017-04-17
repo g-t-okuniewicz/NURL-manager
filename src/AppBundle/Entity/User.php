@@ -41,6 +41,11 @@ class User implements UserInterface, \Serializable
      */
     private $isActive;
 
+    /**
+     * @ORM\Column(name="is_public", type="boolean")
+     */
+    private $isPublic;
+
     public function __construct()
     {
         $this->isActive = true;
@@ -175,5 +180,29 @@ class User implements UserInterface, \Serializable
     public function getIsActive()
     {
         return $this->isActive;
+    }
+
+    /**
+     * Set isPublic
+     *
+     * @param boolean $isPublic
+     *
+     * @return User
+     */
+    public function setIsPublic($isPublic)
+    {
+        $this->isPublic = $isPublic;
+
+        return $this;
+    }
+
+    /**
+     * Get isPublic
+     *
+     * @return boolean
+     */
+    public function getIsPublic()
+    {
+        return $this->isPublic;
     }
 }
