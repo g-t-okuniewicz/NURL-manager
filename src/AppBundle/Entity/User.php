@@ -6,9 +6,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * Class User
- * @package AppBundle\Entity
- *
  * @ORM\Table(name="app_users")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
  */
@@ -41,14 +38,11 @@ class User implements UserInterface, \Serializable
      */
     private $isActive;
 
-    /**
-     * @ORM\Column(name="is_public", type="boolean")
-     */
-    private $isPublic;
-
     public function __construct()
     {
         $this->isActive = true;
+        // may not be needed, see section on salt below
+        // $this->salt = md5(uniqid(null, true));
     }
 
     public function getUsername()
@@ -79,10 +73,12 @@ class User implements UserInterface, \Serializable
     /** @see \Serializable::serialize() */
     public function serialize()
     {
-        return $this->serialize(array(
+        return serialize(array(
             $this->id,
             $this->username,
             $this->password,
+            // see section on salt below
+            // $this->salt,
         ));
     }
 
@@ -93,6 +89,8 @@ class User implements UserInterface, \Serializable
             $this->id,
             $this->username,
             $this->password,
+            // see section on salt below
+            // $this->salt
             ) = unserialize($serialized);
     }
 
@@ -180,29 +178,5 @@ class User implements UserInterface, \Serializable
     public function getIsActive()
     {
         return $this->isActive;
-    }
-
-    /**
-     * Set isPublic
-     *
-     * @param boolean $isPublic
-     *
-     * @return User
-     */
-    public function setIsPublic($isPublic)
-    {
-        $this->isPublic = $isPublic;
-
-        return $this;
-    }
-
-    /**
-     * Get isPublic
-     *
-     * @return boolean
-     */
-    public function getIsPublic()
-    {
-        return $this->isPublic;
     }
 }

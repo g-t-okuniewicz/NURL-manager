@@ -22,6 +22,14 @@ class Nurl
     private $id;
 
     /**
+     * @var \AppBundle\Entity\User
+     *
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $user;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=255)
@@ -154,5 +162,29 @@ class Nurl
     public function getContent()
     {
         return $this->content;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \AppBundle\Entity\User $user
+     *
+     * @return Nurl
+     */
+    public function setUser(\AppBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \AppBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }
