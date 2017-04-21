@@ -24,3 +24,7 @@ security:
             logout:
                 path: /logout
                 target: /
+
+    role_hierarchy:
+        ROLE_MODERATOR: ROLE_USER
+        ROLE_ADMIN: ROLE_MODERATOR

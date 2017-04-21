@@ -30,6 +30,13 @@ class Nurl
     private $user;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(type="datetime")
+     */
+    private $created;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=255)
@@ -56,7 +63,6 @@ class Nurl
      * @ORM\Column(name="is_private", type="boolean")
      */
     private $is_private = true;
-
 
     /**
      * Get id
@@ -186,5 +192,29 @@ class Nurl
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Set created
+     *
+     * @param \DateTime $created
+     *
+     * @return Nurl
+     */
+    public function setCreated($created)
+    {
+        $this->created = $created;
+
+        return $this;
+    }
+
+    /**
+     * Get created
+     *
+     * @return \DateTime
+     */
+    public function getCreated()
+    {
+        return $this->created;
     }
 }

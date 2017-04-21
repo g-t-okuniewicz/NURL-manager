@@ -9,11 +9,11 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
+
 /**
  * Nurl controller.
  *
  * @Route("nurl")
- * @Security("has_role('ROLE_USER')")
  */
 class NurlController extends Controller
 {
@@ -39,10 +39,13 @@ class NurlController extends Controller
      *
      * @Route("/new", name="nurl_new")
      * @Method({"GET", "POST"})
+     * @Security("has_role('ROLE_USER')")
      */
     public function newAction(Request $request)
     {
         $nurl = new Nurl();
+        $nurl->setUser($this->getUser());
+        $nurl->setCreated(new \DateTime());
         $form = $this->createForm('AppBundle\Form\NurlType', $nurl);
         $form->handleRequest($request);
 

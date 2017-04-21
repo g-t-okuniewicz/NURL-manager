@@ -11,6 +11,7 @@
                 <th>Summary</th>
                 <th>Content</th>
                 <th>Is_private</th>
+                <th>Author</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -22,6 +23,7 @@
                 <td>{{ nurl.summary }}</td>
                 <td>{{ nurl.content }}</td>
                 <td>{% if nurl.isprivate %}Yes{% else %}No{% endif %}</td>
+                <td>{{ nurl.user.username }}</td>
                 <td>
                     <ul>
                         <li>
