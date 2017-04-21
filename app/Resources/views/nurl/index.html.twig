@@ -17,6 +17,7 @@
         </thead>
         <tbody>
         {% for nurl in nurls | reverse %}
+            {% if (nurl.isprivate == false) or ((nurl.isprivate) and (nurl.user == app.user)) %}
             <tr>
                 <td><a href="{{ path('nurl_show', { 'id': nurl.id }) }}">{{ nurl.id }}</a></td>
                 <td>{{ nurl.title }}</td>
@@ -41,6 +42,17 @@
                     </ul>
                 </td>
             </tr>
+
+            <tr>
+                {% for tag in tags %}
+                    {% if tag.nurl == nurl %}
+                        <td>
+                            {{ tag.content }}
+                        </td>
+                    {% endif %}
+                {% endfor %}
+            </tr>
+            {% endif %}
         {% endfor %}
         </tbody>
     </table>
