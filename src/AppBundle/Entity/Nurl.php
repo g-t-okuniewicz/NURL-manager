@@ -65,6 +65,20 @@ class Nurl
     private $is_private = true;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(name="is_published", type="boolean")
+     */
+    private $is_published;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="is_frozen", type="boolean")
+     */
+    private $is_frozen;
+
+    /**
      * Get id
      *
      * @return int
@@ -216,5 +230,53 @@ class Nurl
     public function getCreated()
     {
         return $this->created;
+    }
+
+    /**
+     * Set isPublished
+     *
+     * @param boolean $isPublished
+     *
+     * @return Nurl
+     */
+    public function setIsPublished($isPublished)
+    {
+        $this->is_published = $isPublished;
+
+        return $this;
+    }
+
+    /**
+     * Get isPublished
+     *
+     * @return boolean
+     */
+    public function getIsPublished()
+    {
+        return $this->is_published;
+    }
+
+    /**
+     * Set isFrozen
+     *
+     * @param boolean $isFrozen
+     *
+     * @return Nurl
+     */
+    public function setIsFrozen($isFrozen)
+    {
+        $this->is_frozen = $isFrozen;
+
+        return $this;
+    }
+
+    /**
+     * Get isFrozen
+     *
+     * @return boolean
+     */
+    public function getIsFrozen()
+    {
+        return $this->is_frozen;
     }
 }

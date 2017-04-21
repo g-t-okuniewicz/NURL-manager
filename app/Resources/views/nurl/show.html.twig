@@ -10,18 +10,8 @@
                 <td>{{ nurl.id }}</td>
             </tr>
             <tr>
-                <th>Author</th>
-                <td>
-                    {% if nurl.user is not null %}
-                        {{ nurl.user.username }}
-                    {% else %}
-                        anon
-                    {% endif %}
-                </td>
-            </tr>
-            <tr>
                 <th>Created</th>
-                <td>{{ nurl.created|date("F jS \\a\\t g:ia") }}</td>
+                <td>{% if nurl.created %}{{ nurl.created|date('Y-m-d H:i:s') }}{% endif %}</td>
             </tr>
             <tr>
                 <th>Title</th>
@@ -39,17 +29,16 @@
                 <th>Is_private</th>
                 <td>{% if nurl.isprivate %}Yes{% else %}No{% endif %}</td>
             </tr>
+            <tr>
+                <th>Is_published</th>
+                <td>{% if nurl.ispublished %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Is_frozen</th>
+                <td>{% if nurl.isfrozen %}Yes{% else %}No{% endif %}</td>
+            </tr>
         </tbody>
     </table>
-
-        {% for tag in tags %}
-            {% if tag.nurl == nurl %}
-                <p>
-                {{ tag.content }}
-                </p>
-            {% endif %}
-        {% endfor %}
-
 
     <ul>
         <li>

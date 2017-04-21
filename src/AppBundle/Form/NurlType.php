@@ -5,7 +5,6 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class NurlType extends AbstractType
 {
@@ -14,12 +13,7 @@ class NurlType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('title')->add('summary')->add('content')->add('is_private');
-
-        /*$builder->add('user', EntityType::class, [
-            'class' => 'AppBundle:User',
-            'choice_label' => 'username',
-        ]);*/
+        $builder->add('created')->add('title')->add('summary')->add('content')->add('is_private')->add('is_published')->add('is_frozen')->add('user');
     }
     
     /**

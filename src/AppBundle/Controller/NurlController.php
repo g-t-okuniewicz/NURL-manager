@@ -5,10 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Nurl;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Component\HttpFoundation\Request;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Nurl controller.
@@ -28,11 +25,9 @@ class NurlController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $nurls = $em->getRepository('AppBundle:Nurl')->findAll();
-        $tags = $em->getRepository('AppBundle:Tag')->findAll();
 
         return $this->render('nurl/index.html.twig', array(
             'nurls' => $nurls,
-            'tags' => $tags,
         ));
     }
 
@@ -41,13 +36,10 @@ class NurlController extends Controller
      *
      * @Route("/new", name="nurl_new")
      * @Method({"GET", "POST"})
-     * @Security("has_role('ROLE_USER')")
      */
     public function newAction(Request $request)
     {
         $nurl = new Nurl();
-        $nurl->setUser($this->getUser());
-        $nurl->setCreated(new \DateTime());
         $form = $this->createForm('AppBundle\Form\NurlType', $nurl);
         $form->handleRequest($request);
 
@@ -75,13 +67,8 @@ class NurlController extends Controller
     {
         $deleteForm = $this->createDeleteForm($nurl);
 
-        $em = $this->getDoctrine()->getManager();
-
-        $tags = $em->getRepository('AppBundle:Tag')->findAll();
-
         return $this->render('nurl/show.html.twig', array(
             'nurl' => $nurl,
-            'tags' => $tags,
             'delete_form' => $deleteForm->createView(),
         ));
     }
