@@ -11,7 +11,13 @@
             </tr>
             <tr>
                 <th>Author</th>
-                <td>{{ nurl.user.username }}</td>
+                <td>
+                    {% if nurl.user is not null %}
+                        {{ nurl.user.username }}
+                    {% else %}
+                        anon
+                    {% endif %}
+                </td>
             </tr>
             <tr>
                 <th>Created</th>
@@ -35,6 +41,15 @@
             </tr>
         </tbody>
     </table>
+
+        {% for tag in tags %}
+            {% if tag.nurl == nurl %}
+                <p>
+                {{ tag.content }}
+                </p>
+            {% endif %}
+        {% endfor %}
+
 
     <ul>
         <li>

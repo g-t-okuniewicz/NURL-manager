@@ -16,14 +16,20 @@
             </tr>
         </thead>
         <tbody>
-        {% for nurl in nurls %}
+        {% for nurl in nurls | reverse %}
             <tr>
                 <td><a href="{{ path('nurl_show', { 'id': nurl.id }) }}">{{ nurl.id }}</a></td>
                 <td>{{ nurl.title }}</td>
                 <td>{{ nurl.summary }}</td>
                 <td>{{ nurl.content }}</td>
                 <td>{% if nurl.isprivate %}Yes{% else %}No{% endif %}</td>
-                <td>{{ nurl.user.username }}</td>
+                <td>
+                    {% if nurl.user is not null %}
+                        {{ nurl.user.username }}
+                    {% else %}
+                        anon
+                    {% endif %}
+                </td>
                 <td>
                     <ul>
                         <li>

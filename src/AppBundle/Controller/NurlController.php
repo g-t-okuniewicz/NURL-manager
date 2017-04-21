@@ -73,8 +73,13 @@ class NurlController extends Controller
     {
         $deleteForm = $this->createDeleteForm($nurl);
 
+        $em = $this->getDoctrine()->getManager();
+
+        $tags = $em->getRepository('AppBundle:Tag')->findAll();
+
         return $this->render('nurl/show.html.twig', array(
             'nurl' => $nurl,
+            'tags' => $tags,
             'delete_form' => $deleteForm->createView(),
         ));
     }

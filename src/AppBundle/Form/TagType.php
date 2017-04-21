@@ -5,6 +5,7 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class TagType extends AbstractType
 {
@@ -13,7 +14,12 @@ class TagType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('content')->add('upvotes')->add('downvotes')->add('nurl');
+        $builder->add('content')->add('upvotes')->add('downvotes')->add('isCandidate');
+
+        $builder->add('nurl', EntityType::class, [
+            'class' => 'AppBundle:Nurl',
+            'choice_label' => 'title',
+        ]);
     }
     
     /**

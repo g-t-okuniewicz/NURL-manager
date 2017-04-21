@@ -21,6 +21,10 @@
                 <th>Downvotes</th>
                 <td>{{ tag.downvotes }}</td>
             </tr>
+            <tr>
+                <th>Iscandidate</th>
+                <td>{% if tag.isCandidate %}Yes{% else %}No{% endif %}</td>
+            </tr>
         </tbody>
     </table>
 

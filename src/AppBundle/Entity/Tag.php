@@ -50,6 +50,13 @@ class Tag
      */
     private $nurl;
 
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="is_candidate", type="boolean")
+     */
+    private $isCandidate;
+
 
     /**
      * Get id
@@ -155,5 +162,29 @@ class Tag
     public function getNurl()
     {
         return $this->nurl;
+    }
+
+    /**
+     * Set isCandidate
+     *
+     * @param string $isCandidate
+     *
+     * @return Tag
+     */
+    public function setIsCandidate($isCandidate)
+    {
+        $this->isCandidate = $isCandidate;
+
+        return $this;
+    }
+
+    /**
+     * Get isCandidate
+     *
+     * @return string
+     */
+    public function getIsCandidate()
+    {
+        return $this->isCandidate;
     }
 }

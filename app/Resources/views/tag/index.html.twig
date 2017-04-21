@@ -10,6 +10,7 @@
                 <th>Content</th>
                 <th>Upvotes</th>
                 <th>Downvotes</th>
+                <th>Iscandidate</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -20,6 +21,7 @@
                 <td>{{ tag.content }}</td>
                 <td>{{ tag.upvotes }}</td>
                 <td>{{ tag.downvotes }}</td>
+                <td>{% if tag.isCandidate %}Yes{% else %}No{% endif %}</td>
                 <td>
                     <ul>
                         <li>
