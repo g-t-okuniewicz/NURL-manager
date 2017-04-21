@@ -8,9 +8,8 @@
             <tr>
                 <th>Id</th>
                 <th>Content</th>
-                <th>Upvotes</th>
-                <th>Downvotes</th>
-                <th>Iscandidate</th>
+                <th>Votes</th>
+                <th>Is_candidate</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -19,9 +18,8 @@
             <tr>
                 <td><a href="{{ path('tag_show', { 'id': tag.id }) }}">{{ tag.id }}</a></td>
                 <td>{{ tag.content }}</td>
-                <td>{{ tag.upvotes }}</td>
-                <td>{{ tag.downvotes }}</td>
-                <td>{% if tag.isCandidate %}Yes{% else %}No{% endif %}</td>
+                <td>{{ tag.votes }}</td>
+                <td>{% if tag.iscandidate %}Yes{% else %}No{% endif %}</td>
                 <td>
                     <ul>
                         <li>

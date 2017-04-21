@@ -14,6 +14,16 @@
                 <td>{% if nurl.created %}{{ nurl.created|date('Y-m-d H:i:s') }}{% endif %}</td>
             </tr>
             <tr>
+                <th>Author</th>
+                <td>
+                    {% if nurl.user %}
+                        <a href="{{ path('user_show', {'id':nurl.user.id}) }}">{{ nurl.user.username }}</a>
+                    {% else %}
+                        anon
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
                 <th>Title</th>
                 <td>{{ nurl.title }}</td>
             </tr>

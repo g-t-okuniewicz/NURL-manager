@@ -31,16 +31,9 @@ class Tag
     /**
      * @var int
      *
-     * @ORM\Column(name="upvotes", type="integer")
+     * @ORM\Column(name="votes", type="integer")
      */
-    private $upvotes;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="downvotes", type="integer")
-     */
-    private $downvotes;
+    private $votes;
 
     /**
      * @var \AppBundle\Entity\Nurl
@@ -55,7 +48,7 @@ class Tag
      *
      * @ORM\Column(name="is_candidate", type="boolean")
      */
-    private $isCandidate;
+    private $is_candidate;
 
 
     /**
@@ -93,54 +86,6 @@ class Tag
     }
 
     /**
-     * Set upvotes
-     *
-     * @param integer $upvotes
-     *
-     * @return Tag
-     */
-    public function setUpvotes($upvotes)
-    {
-        $this->upvotes = $upvotes;
-
-        return $this;
-    }
-
-    /**
-     * Get upvotes
-     *
-     * @return int
-     */
-    public function getUpvotes()
-    {
-        return $this->upvotes;
-    }
-
-    /**
-     * Set downvotes
-     *
-     * @param integer $downvotes
-     *
-     * @return Tag
-     */
-    public function setDownvotes($downvotes)
-    {
-        $this->downvotes = $downvotes;
-
-        return $this;
-    }
-
-    /**
-     * Get downvotes
-     *
-     * @return int
-     */
-    public function getDownvotes()
-    {
-        return $this->downvotes;
-    }
-
-    /**
      * Set nurl
      *
      * @param \AppBundle\Entity\Nurl $nurl
@@ -171,9 +116,9 @@ class Tag
      *
      * @return Tag
      */
-    public function setIsCandidate($isCandidate)
+    public function setIsCandidate($is_candidate)
     {
-        $this->isCandidate = $isCandidate;
+        $this->is_candidate= $is_candidate;
 
         return $this;
     }
@@ -185,6 +130,30 @@ class Tag
      */
     public function getIsCandidate()
     {
-        return $this->isCandidate;
+        return $this->is_candidate;
+    }
+
+    /**
+     * Set votes
+     *
+     * @param integer $votes
+     *
+     * @return Tag
+     */
+    public function setVotes($votes)
+    {
+        $this->votes = $votes;
+
+        return $this;
+    }
+
+    /**
+     * Get votes
+     *
+     * @return integer
+     */
+    public function getVotes()
+    {
+        return $this->votes;
     }
 }

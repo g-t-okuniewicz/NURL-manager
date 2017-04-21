@@ -23,7 +23,11 @@
                 <td>{{ user.password }}</td>
                 <td>{{ user.email }}</td>
                 <td>{% if user.isActive %}Yes{% else %}No{% endif %}</td>
-                <td>{{ user.roles }}</td>
+                <td>
+                    {% for role in user.roles %}
+                        {{ role }}
+                    {% endfor %}
+                </td>
                 <td>
                     <ul>
                         <li>

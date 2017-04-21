@@ -1,0 +1,22 @@
+h2 {
+
+}
+.nurl {
+    border: 0.1rem solid darkblue;
+    background-color: #0088CC;
+    padding: 0.2rem;
+    margin: 0.2rem;
+}
+
+.private {
+    border: 0.1rem solid darkred;
+    background-color: #dd4444;
+}
+
+.frozen-url {
+    color: red;
+}
+
+td {
+    border: 0.1rem solid yellow;
+}

@@ -1,0 +1,29 @@
+body {
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+header {
+    background-color: black;
+    color: white;
+    padding: 0.5rem;
+    font-weight: bold;
+}
+
+div#site-title {
+    color: white;
+    font-size: 2rem;
+}
+
+div#login {
+    text-align: right;
+}
+
+div#login a {
+    text-decoration: none;
+    color: white;
+}
+
+div#login a:hover {
+    background-color: white;
+    color: black;
+}

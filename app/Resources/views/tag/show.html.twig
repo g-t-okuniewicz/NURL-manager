@@ -14,16 +14,12 @@
                 <td>{{ tag.content }}</td>
             </tr>
             <tr>
-                <th>Upvotes</th>
-                <td>{{ tag.upvotes }}</td>
+                <th>Votes</th>
+                <td>{{ tag.votes }}</td>
             </tr>
             <tr>
-                <th>Downvotes</th>
-                <td>{{ tag.downvotes }}</td>
-            </tr>
-            <tr>
-                <th>Iscandidate</th>
-                <td>{% if tag.isCandidate %}Yes{% else %}No{% endif %}</td>
+                <th>Is_candidate</th>
+                <td>{% if tag.iscandidate %}Yes{% else %}No{% endif %}</td>
             </tr>
         </tbody>
     </table>

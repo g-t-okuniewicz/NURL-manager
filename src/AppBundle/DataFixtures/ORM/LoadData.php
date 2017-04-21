@@ -6,6 +6,7 @@ use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use AppBundle\Entity\User;
 use AppBundle\Entity\Nurl;
+use AppBundle\Entity\Tag;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -33,7 +34,7 @@ class LoadData implements FixtureInterface, ContainerAwareInterface
         // create nurls
         $nurl1 = $this->createNurl(
             $userUser1,
-            new \DateTime(),
+            new \DateTime('12-01-2017 21:15:36'),
             'Google',
             'Quite popular search engine',
             'https://www.google.ie/',
@@ -43,7 +44,7 @@ class LoadData implements FixtureInterface, ContainerAwareInterface
         );
         $nurl2 = $this->createNurl(
             $userUser2,
-            new \DateTime(),
+            new \DateTime('14-01-2017 12:47:55'),
             'Yahoo',
             'Another search engine',
             'https://ie.yahoo.com/',
@@ -53,17 +54,17 @@ class LoadData implements FixtureInterface, ContainerAwareInterface
         );
         $nurl3 = $this->createNurl(
             $userUser3,
-            new \DateTime(),
+            new \DateTime('04-02-2017 08:17:18'),
             'Yandex',
             'Yet another search engine',
             'https://www.yandex.com/',
             false,
             true,
             false
-        );
+        );;
         $nurl4 = $this->createNurl(
             $userUser1,
-            new \DateTime(),
+            new \DateTime('13-02-2017 20:30:11'),
             'Bing',
             "Microsoft's search engine",
             'https://www.bing.com/',
@@ -73,7 +74,7 @@ class LoadData implements FixtureInterface, ContainerAwareInterface
         );
         $nurl5 = $this->createNurl(
             $userUser2,
-            new \DateTime(),
+            new \DateTime('14-02-2017 16:51:23'),
             'Wikipedia',
             'Online encyclopedia',
             'https://en.wikipedia.org/wiki/Main_Page',
@@ -83,7 +84,7 @@ class LoadData implements FixtureInterface, ContainerAwareInterface
         );
         $nurl6 = $this->createNurl(
             null,
-            new \DateTime(),
+            new \DateTime('11-03-2017 19:01:03'),
             'MiniJuegos',
             'Flash games',
             'http://www.minijuegos.com/',
@@ -92,7 +93,52 @@ class LoadData implements FixtureInterface, ContainerAwareInterface
             false
         );
 
-
+        //create tags
+        $tag1 = $this->createTag(
+            'search engine',
+            $nurl1,
+            false
+        );
+        $tag2 = $this->createTag(
+            'useful',
+            $nurl1,
+            false
+        );
+        $tag3 = $this->createTag(
+            'life-saver',
+            $nurl1,
+            true
+        );
+        $tag4 = $this->createTag(
+            'search engine',
+            $nurl2,
+            false
+        );
+        $tag5 = $this->createTag(
+            'not google',
+            $nurl2,
+            false
+        );
+        $tag6 = $this->createTag(
+            'not google',
+            $nurl2,
+            true
+        );
+        $tag7 = $this->createTag(
+            'search engine',
+            $nurl3,
+            false
+        );
+        $tag8 = $this->createTag(
+            'alternative',
+            $nurl3,
+            false
+        );
+        $tag9 = $this->createTag(
+            'Russian',
+            $nurl3,
+            true
+        );
 
         // store to DB
         $manager->persist($userUser1);
@@ -106,6 +152,15 @@ class LoadData implements FixtureInterface, ContainerAwareInterface
         $manager->persist($nurl4);
         $manager->persist($nurl5);
         $manager->persist($nurl6);
+        $manager->persist($tag1);
+        $manager->persist($tag2);
+        $manager->persist($tag3);
+        $manager->persist($tag4);
+        $manager->persist($tag5);
+        $manager->persist($tag6);
+        $manager->persist($tag7);
+        $manager->persist($tag8);
+        $manager->persist($tag9);
         $manager->flush();
     }
 
@@ -143,5 +198,16 @@ class LoadData implements FixtureInterface, ContainerAwareInterface
         $nurl->setIsFrozen($is_frozen);
 
         return $nurl;
+    }
+
+    private function createTag($content, $nurl, $is_candidate)
+    {
+        $tag = new Tag();
+        $tag->setContent($content);
+        $tag->setNurl($nurl);
+        $tag->setIsCandidate($is_candidate);
+        $tag->setVotes(0);
+
+        return $tag;
     }
 }

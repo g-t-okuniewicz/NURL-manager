@@ -2,11 +2,24 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        <title>{% block title %}NURL-manager{% endblock %}</title>
+        <style>
+            @import '/css/style.css';
+            {% block stylesheets %}{% endblock %}
+        </style>
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
+        <header>
+            <div id="site-title">NURL-manager</div>
+            <div id="login">
+                {% if app.user %}
+                    <a href="{{ path('logout') }}">Logout</a>
+                {% else %}
+                    <a href="{{ path('login') }}">Login</a>
+                {% endif %}
+            </div>
+        </header>
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </body>
