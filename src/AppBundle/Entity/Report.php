@@ -32,9 +32,9 @@ class Report
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="string", length=255)
+     * @ORM\Column(name="content", type="string", length=255)
      */
-    private $description;
+    private $content;
 
 
     /**
@@ -72,26 +72,26 @@ class Report
     }
 
     /**
-     * Set description
+     * Set content
      *
-     * @param string $description
+     * @param string $content
      *
      * @return Report
      */
-    public function setDescription($description)
+    public function setContent($content)
     {
-        $this->description = $description;
+        $this->content = $content;
 
         return $this;
     }
 
     /**
-     * Get description
+     * Get content
      *
      * @return string
      */
-    public function getDescription()
+    public function getContent()
     {
-        return $this->description;
+        return $this->content;
     }
 }

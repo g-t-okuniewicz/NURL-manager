@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Report;
+use AppBundle\Entity\Nurl;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
@@ -34,12 +35,13 @@ class ReportController extends Controller
     /**
      * Creates a new report entity.
      *
-     * @Route("/new", name="report_new")
+     * @Route("/new/{id}", name="report_new")
      * @Method({"GET", "POST"})
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request, Nurl $nurl)
     {
         $report = new Report();
+        $report->setNurl($nurl);
         $form = $this->createForm('AppBundle\Form\ReportType', $report);
         $form->handleRequest($request);
 

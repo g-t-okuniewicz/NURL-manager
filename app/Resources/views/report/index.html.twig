@@ -7,7 +7,7 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Description</th>
+                <th>Content</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -15,7 +15,7 @@
         {% for report in reports %}
             <tr>
                 <td><a href="{{ path('report_show', { 'id': report.id }) }}">{{ report.id }}</a></td>
-                <td>{{ report.description }}</td>
+                <td>{{ report.content }}</td>
                 <td>
                     <ul>
                         <li>

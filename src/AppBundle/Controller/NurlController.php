@@ -25,9 +25,11 @@ class NurlController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $nurls = $em->getRepository('AppBundle:Nurl')->findAll();
+        $tags = $em->getRepository('AppBundle:Tag')->findAll();
 
         return $this->render('nurl/index.html.twig', array(
             'nurls' => $nurls,
+            'tags' => $tags
         ));
     }
 

@@ -17,6 +17,12 @@
                     <td>
                         ID: {{ nurl.id }}
                     </td>
+                    <td>
+                        By:
+                    </td>
+                    <td>
+                        <a href="{{ path('report_new', {'id':nurl.id}) }}">Report</a>
+                    </td>
                 </tr>
                 <tr>
                     <td>
@@ -40,6 +46,16 @@
                         {% else %}
                             <a href="{{ nurl.content }}">{{ nurl.content }}</a>
                         {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Tags:
+                        {% for tag in tags %}
+                            {% if tag.nurl == nurl %}
+                                {{ tag.content }},
+                            {% endif %}
+                        {% endfor %}
                     </td>
                 </tr>
                 </tbody>

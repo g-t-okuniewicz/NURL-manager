@@ -120,7 +120,7 @@ class LoadData implements FixtureInterface, ContainerAwareInterface
             false
         );
         $tag6 = $this->createTag(
-            'not google',
+            'candidate tag',
             $nurl2,
             true
         );

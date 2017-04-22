@@ -12,12 +12,24 @@
     <body>
         <header>
             <div id="site-title">NURL-manager</div>
+
+            <nav>
+                <ul>
+                    <li>
+                        <a href="{{ path('nurl_index') }}">NURL</a>
+                    </li>
+                    <li>
+                        {% if app.user %}
+                            <a href="{{ path('logout') }}">Logout</a>
+                        {% else %}
+                            <a href="{{ path('login') }}">Login</a>
+                        {% endif %}
+                    </li>
+                </ul>
+            </nav>
+
             <div id="login">
-                {% if app.user %}
-                    <a href="{{ path('logout') }}">Logout</a>
-                {% else %}
-                    <a href="{{ path('login') }}">Login</a>
-                {% endif %}
+
             </div>
         </header>
         {% block body %}{% endblock %}
