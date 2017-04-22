@@ -26,10 +26,12 @@ class NurlController extends Controller
 
         $nurls = $em->getRepository('AppBundle:Nurl')->findAll();
         $tags = $em->getRepository('AppBundle:Tag')->findAll();
+        $reports = $em->getRepository('AppBundle:Report')->findAll();
 
         return $this->render('nurl/index.html.twig', array(
             'nurls' => $nurls,
-            'tags' => $tags
+            'tags' => $tags,
+            'reports' => $reports
         ));
     }
 

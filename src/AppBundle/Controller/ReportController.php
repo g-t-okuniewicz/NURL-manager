@@ -47,6 +47,8 @@ class ReportController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $nurl->setIsFrozen(true);
+            $em->persist($nurl);
             $em->persist($report);
             $em->flush();
 

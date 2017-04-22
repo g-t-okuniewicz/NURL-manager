@@ -53,7 +53,21 @@
                         Tags:
                         {% for tag in tags %}
                             {% if tag.nurl == nurl %}
-                                {{ tag.content }},
+                                {% if tag.iscandidate %}
+                                    <span style="color:green">{{ tag.content }}, </span>
+                                {% else %}
+                                    {{ tag.content }},
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Reports:
+                        {% for report in reports %}
+                            {% if report.nurl == nurl %}
+                                {{ report.content }},
                             {% endif %}
                         {% endfor %}
                     </td>
