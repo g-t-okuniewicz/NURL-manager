@@ -141,7 +141,6 @@ class UserController extends Controller
      *
      * @Route("/{id}/profile", name="user_profile")
      * @Method({"GET", "POST"})
-     * @Security("has_role('ROLE_USER')")
      */
     public function profileAction(Request $request, User $user)
     {
@@ -154,7 +153,7 @@ class UserController extends Controller
         $collections = $this->getDoctrine()
             ->getRepository('AppBundle:Collection')
             ->findBy(
-                array('user' => $this->getUser())
+                array('user' => $user)
             );
 
         $sharedCollections = $this->getDoctrine()

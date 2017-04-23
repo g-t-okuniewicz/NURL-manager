@@ -7,9 +7,9 @@
 {% block body %}
     <h1>Recent NURLs</h1>
 
-    {% for nurl in nurls %}
-        {% if nurl.ispublished %}
-            {% if (nurl.isprivate == false) or (nurl.user == app.user) %}
+    {% for nurl in nurls|reverse %}
+        {% if nurl.ispublished or is_granted('ROLE_ADMIN') %}
+            {% if (nurl.isprivate == false) or (nurl.user == app.user) or is_granted('ROLE_ADMIN') %}
                 <div class="nurl {% if nurl.isprivate %}private{% endif %}">
                     <h2>{{ nurl.title }}</h2>
                     <table>
@@ -28,8 +28,8 @@
                                     </td>
                                 {% endif %}
                             {% endif %}
-                            {% if nurl.user %}
-                                {% if nurl.user == app.user %}
+                            {% if nurl.user or is_granted('ROLE_ADMIN') %}
+                                {% if (nurl.user == app.user) or is_granted('ROLE_ADMIN') %}
                                     <td>
                                         <a href="{{ path('nurl_edit', {'id':nurl.id}) }}">Edit</a>
                                     </td>

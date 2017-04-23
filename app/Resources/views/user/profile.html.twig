@@ -32,16 +32,22 @@
             <li>{{ nurl.title }}</li>
         {% endfor %}
     </ul>
-    <h2>NURLs in collection</h2>
-    <ul>
-        {% for collection in collections %}
-            <li>ID: {{ collection.nurl.id }} title: {{ collection.nurl.title }}</li>
-        {% endfor %}
-    </ul>
-    <h2>Shared with {{ user.username }}</h2>
-    <ul>
-        {% for shared_collection in shared_collections %}
-            <li>Collection ID: {{ shared_collection.collection.id }}</li>
-        {% endfor %}
-    </ul>
+    {% if (user == app.user) or is_granted('ROLE_ADMIN') %}
+        {% if collections is not empty %}
+            <h2>NURLs in collection</h2>
+            <ul>
+                {% for collection in collections %}
+                    <li>ID: {{ collection.nurl.id }} title: {{ collection.nurl.title }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        {% if shared_collections is not empty %}
+            <h2>Shared with {{ user.username }}</h2>
+            <ul>
+                {% for shared_collection in shared_collections %}
+                    <li>Collection ID: {{ shared_collection.collection.id }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endif %}
 {% endblock %}
