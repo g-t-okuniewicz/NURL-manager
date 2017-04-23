@@ -48,6 +48,8 @@ class NurlController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $nurl->setUser($this->getUser());
+            $nurl->setCreated(new \DateTime());
             $em = $this->getDoctrine()->getManager();
             $em->persist($nurl);
             $em->flush();

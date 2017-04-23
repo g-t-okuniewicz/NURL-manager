@@ -13,7 +13,7 @@ class TagType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('content')->add('votes')->add('is_candidate')->add('nurl');
+        $builder->add('content');
     }
     
     /**

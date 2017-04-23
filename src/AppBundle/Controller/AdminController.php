@@ -18,6 +18,10 @@ class AdminController extends Controller
      */
     public function adminAction()
     {
-        return new Response('<html><body>Admin page!</body></html>');
+        $username = $this->getUser()->getUsername();
+
+        return $this->render('admin/index.html.twig', array(
+            'username' => $username,
+        ));
     }
 }

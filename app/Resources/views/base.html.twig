@@ -16,8 +16,27 @@
             <nav>
                 <ul>
                     <li>
-                        <a href="{{ path('nurl_index') }}">NURL</a>
+                        <a href="{{ path('nurl_index') }}">Nurls</a>
                     </li>
+                    <li>|</li>
+                    <li>
+                        <a href="{{ path('nurl_new') }}">Add nurl</a>
+                    </li>
+                    <li>|</li>
+
+
+                    {% if is_granted('ROLE_USER') %}
+                        <li>
+                            <a href="{{ path('user_profile', {'id':app.user.id}) }}">User</a>
+                        </li>
+                        <li>|</li>
+                    {% endif %}
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <li>
+                            <a href="{{ path('admin_index') }}">Admin</a>
+                        </li>
+                        <li>|</li>
+                    {% endif %}
                     <li>
                         {% if app.user %}
                             <a href="{{ path('logout') }}">Logout</a>

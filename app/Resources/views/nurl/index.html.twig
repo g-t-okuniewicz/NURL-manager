@@ -8,72 +8,79 @@
     <h1>Recent NURLs</h1>
 
     {% for nurl in nurls %}
-
-        <div class="nurl {% if nurl.isprivate %}private{% endif %}">
-            <h2>{{ nurl.title }}</h2>
-            <table>
-                <tbody>
-                <tr>
-                    <td>
-                        ID: {{ nurl.id }}
-                    </td>
-                    <td>
-                        By:
-                    </td>
-                    <td>
-                        <a href="{{ path('report_new', {'id':nurl.id}) }}">Report</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        {{ nurl.created|date("F jS, Y \\a\\t g:ia") }}
-                    </td>
-                    <td>
-                        {% if nurl.user %}
-                            <a href="{{ path('user_show', {'id':nurl.user.id}) }}">{{ nurl.user.username }}</a>
-                        {% else %}
-                            anon
-                        {% endif %}
-                    </td>
-                </tr>
-                <tr>
-                    <td>{{ nurl.summary }}</td>
-                </tr>
-                <tr>
-                    <td>
-                        {% if nurl.isfrozen %}
-                        <span class="frozen-url">{{ nurl.content }}</span>
-                        {% else %}
-                            <a href="{{ nurl.content }}">{{ nurl.content }}</a>
-                        {% endif %}
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Tags:
-                        {% for tag in tags %}
-                            {% if tag.nurl == nurl %}
-                                {% if tag.iscandidate %}
-                                    <span style="color:green">{{ tag.content }}, </span>
-                                {% else %}
-                                    {{ tag.content }},
+        {% if nurl.ispublished %}
+            <div class="nurl {% if nurl.isprivate %}private{% endif %}">
+                <h2>{{ nurl.title }}</h2>
+                <table>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <strong>ID: {{ nurl.id }}</strong>
+                        </td>
+                        <td>
+                            By:
+                        </td>
+                        <td>
+                            <a href="{{ path('report_new', {'id':nurl.id}) }}">Report</a>
+                        </td>
+                        <td>
+                            <a href="{{ path('tag_new', {'id':nurl.id}) }}">Tag</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            {{ nurl.created|date("F jS, Y \\a\\t g:ia") }}
+                        </td>
+                        <td>
+                            {% if nurl.user %}
+                                <a href="{{ path('user_show', {'id':nurl.user.id}) }}">{{ nurl.user.username }}</a>
+                            {% else %}
+                                anon
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>{{ nurl.summary }}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            {% if nurl.isfrozen %}
+                                <span class="frozen-url">***{{ nurl.content }}***</span>
+                            {% else %}
+                                <a href="{{ nurl.content }}">{{ nurl.content }}</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Tags:</strong>
+                            <br>
+                            {% for tag in tags %}
+                                {% if tag.nurl == nurl %}
+                                    {% if tag.iscandidate %}
+                                        <span style="color:green">{{ tag.content }}</span>
+                                        <br>
+                                    {% else %}
+                                        {{ tag.content }}
+                                        <br>
+                                    {% endif %}
                                 {% endif %}
-                            {% endif %}
-                        {% endfor %}
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Reports:
-                        {% for report in reports %}
-                            {% if report.nurl == nurl %}
-                                {{ report.content }},
-                            {% endif %}
-                        {% endfor %}
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
+                            {% endfor %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Reports:</strong>
+                            {% for report in reports %}
+                                {% if report.nurl == nurl %}
+                                    {{ report.content }},
+                                {% endif %}
+                            {% endfor %}
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        {% endif %}
     {% endfor %}
 {% endblock %}

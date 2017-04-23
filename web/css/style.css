@@ -6,7 +6,6 @@ header {
     background-color: black;
     color: white;
     padding: 0.5rem;
-    font-weight: bold;
 }
 
 div#site-title {
@@ -14,16 +13,22 @@ div#site-title {
     font-size: 2rem;
 }
 
-div#login {
-    text-align: right;
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
 }
 
-div#login a {
-    text-decoration: none;
+nav li {
+    display: inline;
+}
+
+nav a {
     color: white;
+    text-decoration: none;
 }
 
-div#login a:hover {
-    background-color: white;
+nav a:hover {
     color: black;
+    background-color: white;
 }

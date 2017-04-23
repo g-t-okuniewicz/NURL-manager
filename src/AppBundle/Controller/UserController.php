@@ -5,7 +5,9 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
  * User controller.
@@ -132,5 +134,54 @@ class UserController extends Controller
             ->setMethod('DELETE')
             ->getForm()
         ;
+    }
+
+    /**
+     * Displays user profile.
+     *
+     * @Route("/{id}/profile", name="user_profile")
+     * @Method({"GET", "POST"})
+     * @Security("has_role('ROLE_USER')")
+     */
+    public function profileAction(Request $request, User $user)
+    {
+        $nurls = $this->getDoctrine()
+            ->getRepository('AppBundle:Nurl')
+            ->findBy(
+                array('user' => $this->getUser())
+            );
+
+        $collections = $this->getDoctrine()
+            ->getRepository('AppBundle:Collection')
+            ->findBy(
+                array('user' => $this->getUser())
+            );
+
+        $deleteForm = $this->createDeleteForm($user);
+        $editForm = $this->createForm('AppBundle\Form\UserType', $user);
+        $editForm->handleRequest($request);
+
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+
+            $encodedPassword = $this
+                ->get('security.password_encoder')
+                ->encodePassword($user, $user->getPassword());
+
+            $user->setPassword($encodedPassword);
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
+
+            return $this->redirectToRoute('user_edit', array('id' => $user->getId()));
+        }
+
+        return $this->render('user/profile.html.twig', array(
+            'user' => $user,
+            'nurls' => $nurls,
+            'collections' => $collections,
+            'edit_form' => $editForm->createView(),
+            'delete_form' => $deleteForm->createView(),
+        ));
     }
 }

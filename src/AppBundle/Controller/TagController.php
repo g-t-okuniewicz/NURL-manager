@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Tag;
+use AppBundle\Entity\Nurl;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
@@ -34,12 +35,15 @@ class TagController extends Controller
     /**
      * Creates a new tag entity.
      *
-     * @Route("/new", name="tag_new")
+     * @Route("/new/{id}", name="tag_new")
      * @Method({"GET", "POST"})
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request, Nurl $nurl)
     {
         $tag = new Tag();
+        $tag->setNurl($nurl);
+        $tag->setVotes(0);
+        $tag->setIsCandidate(true);
         $form = $this->createForm('AppBundle\Form\TagType', $tag);
         $form->handleRequest($request);
 

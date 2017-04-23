@@ -7,6 +7,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use AppBundle\Entity\User;
 use AppBundle\Entity\Nurl;
 use AppBundle\Entity\Tag;
+use AppBundle\Entity\Collection;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -140,18 +141,29 @@ class LoadData implements FixtureInterface, ContainerAwareInterface
             true
         );
 
+        // create collections
+        $collection1 = $this->createCollection($userUser1, $nurl2);
+        $collection2 = $this->createCollection($userUser1, $nurl4);
+        $collection3 = $this->createCollection($userUser1, $nurl6);
+        $collection4 = $this->createCollection($userUser2, $nurl1);
+        $collection5 = $this->createCollection($userUser2, $nurl3);
+        $collection6 = $this->createCollection($userUser2, $nurl5);
+
         // store to DB
+        // users
         $manager->persist($userUser1);
         $manager->persist($userUser2);
         $manager->persist($userUser3);
         $manager->persist($userAdmin);
         $manager->persist($userModerator);
+        // nurls
         $manager->persist($nurl1);
         $manager->persist($nurl2);
         $manager->persist($nurl3);
         $manager->persist($nurl4);
         $manager->persist($nurl5);
         $manager->persist($nurl6);
+        // tags
         $manager->persist($tag1);
         $manager->persist($tag2);
         $manager->persist($tag3);
@@ -161,6 +173,14 @@ class LoadData implements FixtureInterface, ContainerAwareInterface
         $manager->persist($tag7);
         $manager->persist($tag8);
         $manager->persist($tag9);
+        // collections
+        $manager->persist($collection1);
+        $manager->persist($collection2);
+        $manager->persist($collection3);
+        $manager->persist($collection4);
+        $manager->persist($collection5);
+        $manager->persist($collection6);
+        // -
         $manager->flush();
     }
 
@@ -209,5 +229,14 @@ class LoadData implements FixtureInterface, ContainerAwareInterface
         $tag->setVotes(0);
 
         return $tag;
+    }
+
+    private function createCollection($user, $nurl)
+    {
+        $collection = new Collection();
+        $collection->setUser($user);
+        $collection->setNurl($nurl);
+
+        return $collection;
     }
 }

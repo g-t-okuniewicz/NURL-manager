@@ -13,7 +13,7 @@ class NurlType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('created')->add('title')->add('summary')->add('content')->add('is_private')->add('is_published')->add('is_frozen')->add('user');
+        $builder->add('title')->add('summary')->add('content')->add('is_private')->add('is_published')->add('is_frozen');
     }
     
     /**
