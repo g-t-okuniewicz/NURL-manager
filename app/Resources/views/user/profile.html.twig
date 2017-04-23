@@ -1,14 +1,21 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>{{ app.user.username }} edit</h1>
+    <h1>{{ user.username }}</h1>
 
-    {{ form_start(edit_form) }}
+    {% if (user == app.user) or is_granted('ROLE_ADMIN') %}
+        {{ form_start(edit_form) }}
         {{ form_widget(edit_form) }}
         <input type="submit" value="Save changes" />
-    {{ form_end(edit_form) }}
+        {{ form_end(edit_form) }}
+    {% else %}
+        Username: {{ user.username }}
+        <br>
+        email: {{ user.email }}
+    {% endif %}
 
-    <ul>
+    {% if is_granted('ROLE_ADMIN') %}
+        <ul>
         <li>
             <a href="{{ path('user_index') }}">Back to the list</a>
         </li>
@@ -18,7 +25,8 @@
             {{ form_end(delete_form) }}
         </li>
     </ul>
-    <h2>{{ app.user.username }}'s NURLs</h2>
+    {% endif %}
+    <h2>{{ user.username }}'s NURLs</h2>
     <ul>
         {% for nurl in nurls %}
             <li>{{ nurl.title }}</li>
@@ -30,7 +38,7 @@
             <li>ID: {{ collection.nurl.id }} title: {{ collection.nurl.title }}</li>
         {% endfor %}
     </ul>
-    <h2>Shared with {{ app.user.username }}</h2>
+    <h2>Shared with {{ user.username }}</h2>
     <ul>
         {% for shared_collection in shared_collections %}
             <li>Collection ID: {{ shared_collection.collection.id }}</li>

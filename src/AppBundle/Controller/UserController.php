@@ -148,7 +148,7 @@ class UserController extends Controller
         $nurls = $this->getDoctrine()
             ->getRepository('AppBundle:Nurl')
             ->findBy(
-                array('user' => $this->getUser())
+                array('user' => $user)
             );
 
         $collections = $this->getDoctrine()
@@ -160,7 +160,7 @@ class UserController extends Controller
         $sharedCollections = $this->getDoctrine()
             ->getRepository('AppBundle:SharedCollection')
             ->findBy(
-                array('shared_with' => $this->getUser())
+                array('shared_with' => $user)
             );
 
         $deleteForm = $this->createDeleteForm($user);

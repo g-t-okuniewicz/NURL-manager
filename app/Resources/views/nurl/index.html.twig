@@ -42,7 +42,7 @@
                             </td>
                             <td>
                                 {% if nurl.user %}
-                                    <a href="{{ path('user_show', {'id':nurl.user.id}) }}">{{ nurl.user.username }}</a>
+                                    <a href="{{ path('user_profile', {'id':nurl.user.id}) }}">{{ nurl.user.username }}</a>
                                 {% else %}
                                     anon
                                 {% endif %}
