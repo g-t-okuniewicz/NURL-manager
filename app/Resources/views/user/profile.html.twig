@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>User edit</h1>
+    <h1>{{ app.user.username }} edit</h1>
 
     {{ form_start(edit_form) }}
         {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
+        <input type="submit" value="Save changes" />
     {{ form_end(edit_form) }}
 
     <ul>
@@ -18,7 +18,7 @@
             {{ form_end(delete_form) }}
         </li>
     </ul>
-    <h2>User's NURLs</h2>
+    <h2>{{ app.user.username }}'s NURLs</h2>
     <ul>
         {% for nurl in nurls %}
             <li>{{ nurl.title }}</li>
@@ -28,6 +28,12 @@
     <ul>
         {% for collection in collections %}
             <li>ID: {{ collection.nurl.id }} title: {{ collection.nurl.title }}</li>
+        {% endfor %}
+    </ul>
+    <h2>Shared with {{ app.user.username }}</h2>
+    <ul>
+        {% for shared_collection in shared_collections %}
+            <li>Collection ID: {{ shared_collection.collection.id }}</li>
         {% endfor %}
     </ul>
 {% endblock %}

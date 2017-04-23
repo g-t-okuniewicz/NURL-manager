@@ -3,9 +3,12 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Collection;
+use AppBundle\Entity\Nurl;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Collection controller.
@@ -132,5 +135,36 @@ class CollectionController extends Controller
             ->setMethod('DELETE')
             ->getForm()
         ;
+    }
+
+    /**
+     *
+     * @Route("/collect/{id}", name="collect")
+     * @Method({"GET", "POST"})
+     */
+    public function collectAction(Request $request, Nurl $nurl)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $collections = $em->getRepository('AppBundle:Collection')
+            ->findBy(
+                array('user' => $this->getUser(),
+                    'nurl' => $nurl)
+            );
+
+        if($collections != null) {
+            return new Response('<html><body>Collection already exists</body></html>');
+        }
+        else {
+            $collection = new Collection();
+            $collection->setNurl($nurl);
+            $collection->setUser($this->getUser());
+
+
+            $em->persist($collection);
+            $em->flush();
+
+            return new Response('<html><body>Adding</body></html>');
+        }
     }
 }

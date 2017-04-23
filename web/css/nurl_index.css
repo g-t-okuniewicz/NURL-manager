@@ -2,15 +2,15 @@ h2 {
 
 }
 .nurl {
-    border: 0.1rem solid darkblue;
-    background-color: #0088CC;
+    border: 0.1rem solid darkgreen;
+    background-color: green;
     padding: 0.2rem;
     margin: 0.2rem;
 }
 
 .private {
-    border: 0.1rem solid darkred;
-    background-color: #dd4444;
+    border: 0.1rem solid darkorange;
+    background-color: orange;
 }
 
 .frozen-url {

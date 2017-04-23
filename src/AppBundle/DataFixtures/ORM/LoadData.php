@@ -8,6 +8,7 @@ use AppBundle\Entity\User;
 use AppBundle\Entity\Nurl;
 use AppBundle\Entity\Tag;
 use AppBundle\Entity\Collection;
+use AppBundle\Entity\SharedCollection;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -149,6 +150,18 @@ class LoadData implements FixtureInterface, ContainerAwareInterface
         $collection5 = $this->createCollection($userUser2, $nurl3);
         $collection6 = $this->createCollection($userUser2, $nurl5);
 
+        // create shared collections
+        $sharedCollection1 = $this->createSharedCollection(
+            $collection2,
+            $userUser1,
+            $userUser2
+        );
+        $sharedCollection2 = $this->createSharedCollection(
+            $collection5,
+            $userUser2,
+            $userUser1
+        );
+
         // store to DB
         // users
         $manager->persist($userUser1);
@@ -180,6 +193,9 @@ class LoadData implements FixtureInterface, ContainerAwareInterface
         $manager->persist($collection4);
         $manager->persist($collection5);
         $manager->persist($collection6);
+        // shared collections
+        $manager->persist($sharedCollection1);
+        $manager->persist($sharedCollection2);
         // -
         $manager->flush();
     }
@@ -238,5 +254,15 @@ class LoadData implements FixtureInterface, ContainerAwareInterface
         $collection->setNurl($nurl);
 
         return $collection;
+    }
+
+    private function createSharedCollection($collection, $user1, $user2)
+    {
+        $sharedCollection = new SharedCollection();
+        $sharedCollection->setCollection($collection);
+        $sharedCollection->setSharedBy($user1);
+        $sharedCollection->setSharedWith($user2);
+
+        return $sharedCollection;
     }
 }

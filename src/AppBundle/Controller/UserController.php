@@ -157,6 +157,12 @@ class UserController extends Controller
                 array('user' => $this->getUser())
             );
 
+        $sharedCollections = $this->getDoctrine()
+            ->getRepository('AppBundle:SharedCollection')
+            ->findBy(
+                array('shared_with' => $this->getUser())
+            );
+
         $deleteForm = $this->createDeleteForm($user);
         $editForm = $this->createForm('AppBundle\Form\UserType', $user);
         $editForm->handleRequest($request);
@@ -173,13 +179,14 @@ class UserController extends Controller
             $em->persist($user);
             $em->flush();
 
-            return $this->redirectToRoute('user_edit', array('id' => $user->getId()));
+            return $this->redirectToRoute('user_profile', array('id' => $user->getId()));
         }
 
         return $this->render('user/profile.html.twig', array(
             'user' => $user,
             'nurls' => $nurls,
             'collections' => $collections,
+            'shared_collections' => $sharedCollections,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
